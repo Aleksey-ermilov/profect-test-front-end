@@ -6,12 +6,13 @@ import './header.css'
 export const Header = () => {
     return (
         <nav className="nav">
+            <h1 className="titleHeader">Тестилка “Незнайка”</h1>
             <ul >
                 <li>
-                    <Link to={'/page2'} >page2</Link>
+                    <Link to={'/auth'} >auth</Link>
                 </li>
                 <li>
-                    <Link to={'/'} >Home</Link>
+                    <Link to={'/reg'} >reg</Link>
                 </li>
             </ul>
         </nav>

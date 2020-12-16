@@ -5,4 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+body, html {
+  height: 100vh
+}
+
+.buttonAll {
+  background: #A100F2 ;
+  border-radius: 10px ;
+  color: white;
+  border: none ;
+  font-family: Gabriela;
+}
+.buttonAll:hover, .buttonAll:focus{
+  background: #ff00cc;
+  box-shadow: 0 0 10px rgb(255, 0, 204);
 }

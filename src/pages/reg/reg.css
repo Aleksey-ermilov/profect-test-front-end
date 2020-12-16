@@ -1,0 +1,44 @@
+.maxHeight{
+    /*height: 100vh;*/
+}
+.containerReg{
+    /*border: rebeccapurple solid 1px;*/
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+}
+.containerButtonUserReg{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+.buttonUserReg{
+    background: #A100F2 ;
+    border-radius: 10px ;
+    color: white;
+    font-size: 18px ;
+    padding: 10px 10px ;
+    width: 150px;
+}
+.containerInputReg{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    /*margin: 0;*/
+}
+.inputReg{
+    padding: 0px 10px !important;
+    font-size: 18px !important;
+    /*color: white;*/
+}
+.inputReg:focus{
+    border-bottom: #A100F2 solid 1px !important;
+}
+.buttonReg {
+    font-size: 20px ;
+    /*width: 200px;*/
+    padding: 10px 40px ;
+    margin-bottom: 20px ;
+}
