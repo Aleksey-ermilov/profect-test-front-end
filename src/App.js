@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route } from "react-router-dom";
 
-import { Header } from "./componets/header/Header";
 import { Auth } from "./pages/auth/Auth";
 import { Reg } from "./pages/reg/Reg";
+import BoardTest from "./pages/boardTest/BoardTest";
 
 import './App.css';
 
@@ -17,6 +17,7 @@ function App() {
 
                 <Route path={'/auth'} component={Auth} exact />
                 <Route path={'/reg'} component={Reg} exact />
+                <Route path={'/boardTest'} component={BoardTest} exact />
 
             </BrowserRouter>
         {/*</div>*/}
