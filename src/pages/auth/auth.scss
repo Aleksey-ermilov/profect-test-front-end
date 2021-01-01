@@ -1,0 +1,108 @@
+@import "../../thems/index.scss";
+
+$colorText: white;
+$colorFocus: #A100F2;
+
+.auth{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(252.59deg, #FF00CC 17.45%, rgba(255, 255, 255, 0) 100%), #333399;
+
+
+
+  &_title{
+    position: absolute;
+    padding: 0;
+    margin:0;
+    top: 30px;
+    left:40px;
+    color: $colorText;
+  }
+
+  &_form{
+    width: 460px;
+    height: 350px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &_header{
+      font-size: 40px ;
+      margin: 0;
+      text-align: center;
+      color: $colorText;
+    }
+
+    &_inputs{
+      width: 350px;
+
+      .input-field input[type=email]:not(.browser-default),
+      .input-field input[type=password]:not(.browser-default){
+        color:$colorText;
+      }
+
+      .input-field input[type=email]:focus:not(.browser-default),
+      .input-field input[type=password]:focus:not(.browser-default) {
+        border-bottom: 1px solid $colorFocus;
+        box-shadow: 0 1px 0 0 $colorFocus;
+      }
+
+      .input-field input[type=email]:focus:not(.browser-default) + label,
+      .input-field input[type=password]:focus:not(.browser-default) + label{
+        color: $colorFocus;
+      }
+
+      .input-field input[type=email]:not(.browser-default).invalid,
+      .input-field input[type=password]:not(.browser-default).invalid{
+        border-bottom: 1px solid $invalidColor;
+        box-shadow: 0 1px 0 0 $invalidColor;
+      }
+
+      .input-field input[type=email]:not(.browser-default).invalid + label,
+      .input-field input[type=password]:not(.browser-default).invalid + label{
+        color: $invalidColor;
+      }
+
+      .input-field input[type=email]:not(.browser-default).valid,
+      .input-field input[type=password]:not(.browser-default).valid{
+        border-bottom: 1px solid $validColor;
+        box-shadow: 0 1px 0 0 $validColor;
+      }
+
+      .input-field input[type=email]:not(.browser-default).valid + label,
+      .input-field input[type=password]:not(.browser-default).valid + label{
+        color: $validColor;
+      }
+
+      .input-field .prefix.active {
+        color: $colorFocus;
+      }
+
+      .input-field .prefix {
+        color: $colorText;
+      }
+
+      &_linc{
+        display: flex;
+        justify-content: space-between;
+
+        a{
+          color: $colorText;
+          font-size: 16px;
+        }
+      }
+
+    }
+    &_button{
+      font-size: 20px ;
+      padding: 10px 40px ;
+    }
+  }
+
+}

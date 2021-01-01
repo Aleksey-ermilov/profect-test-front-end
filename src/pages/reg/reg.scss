@@ -1,0 +1,142 @@
+@import "../../thems/index.scss";
+.reg {
+
+  &_header{
+    margin: 15px 0px;
+    font-size: 35px;
+    text-align: center;
+  }
+
+  &_buttons{
+    margin: 0 auto;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_btn{
+      background: #A100F2 ;
+      border-radius: 10px ;
+      color: white;
+      font-size: 18px ;
+      padding: 10px 10px ;
+      width: 150px;
+      //&:hover{
+      //  background-color: #852EBA;
+      //  box-shadow: none;
+      //}
+      //&:focus{
+      //  background: #ff00cc;
+      //  box-shadow: 0 0 10px rgb(255, 0, 204);
+      //}
+    }
+    &_btn_focus{
+      background: #ff00cc;
+      box-shadow: 0 0 10px rgb(255, 0, 204);
+    }
+  }
+
+  &_form{
+    margin-top: 30px;
+
+    .input-field input[type=email]:focus:not(.browser-default),
+    .input-field input[type=password]:focus:not(.browser-default),
+    .input-field input[type=text]:focus:not(.browser-default){
+      border-bottom: 1px solid $mainColor;
+      box-shadow: 0 1px 0 0 $mainColor;
+    }
+
+    .input-field input[type=email]:focus:not(.browser-default) + label,
+    .input-field input[type=password]:focus:not(.browser-default) + label,
+    .input-field input[type=text]:focus:not(.browser-default) + label{
+      color: $mainColor;
+    }
+
+    .input-field input[type=email]:not(.browser-default).invalid,
+    .input-field input[type=password]:not(.browser-default).invalid,
+    .input-field input[type=text]:not(.browser-default).invalid {
+      border-bottom: 1px solid $invalidColor;
+      box-shadow: 0 1px 0 0 $invalidColor;
+    }
+
+    .input-field input[type=email]:not(.browser-default).invalid + label,
+    .input-field input[type=password]:not(.browser-default).invalid + label,
+    .input-field input[type=text]:not(.browser-default).invalid + label{
+      color: $invalidColor;
+    }
+
+    .input-field input[type=email]:not(.browser-default).valid,
+    .input-field input[type=password]:not(.browser-default).valid,
+    .input-field input[type=text]:not(.browser-default).valid {
+      border-bottom: 1px solid $validColor;
+      box-shadow: 0 1px 0 0 $validColor;
+    }
+
+    .input-field input[type=email]:not(.browser-default).valid + label,
+    .input-field input[type=password]:not(.browser-default).valid + label,
+    .input-field input[type=text]:not(.browser-default).valid + label{
+      color: $validColor;
+    }
+
+    &_btn_submit{
+      display: block;
+      margin: 0 auto;
+      font-size: 20px ;
+      /*width: 200px;*/
+      padding: 10px 40px ;
+      //margin-bottom: 20px ;
+    }
+  }
+
+}
+
+
+
+.maxHeight{
+  /*height: 100vh;*/
+}
+.containerReg{
+  /*border: rebeccapurple solid 1px;*/
+  display: flex;
+  height: 80%;
+  flex-direction: column;
+  /*justify-content: center;*/
+  align-items: center;
+}
+.containerButtonUserReg{
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+}
+.buttonUserReg{
+  background: #A100F2 ;
+  border-radius: 10px ;
+  color: white;
+  font-size: 18px ;
+  padding: 10px 10px ;
+  width: 150px;
+}
+.buttonUserRegFocus{
+  background: #ff00cc;
+  box-shadow: 0 0 10px rgb(255, 0, 204);
+}
+.containerInputReg{
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  /*margin: 0;*/
+}
+.inputReg{
+  padding: 0px 10px !important;
+  font-size: 18px !important;
+  /*color: white;*/
+}
+.inputReg:focus{
+  border-bottom: #A100F2 solid 1px !important;
+}
+.buttonReg {
+  font-size: 20px ;
+  /*width: 200px;*/
+  padding: 10px 40px ;
+  margin-bottom: 20px ;
+}

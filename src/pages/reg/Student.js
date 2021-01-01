@@ -7,9 +7,10 @@ const Student = ({onClickButtonStudent}) => {
     const [course, setCourse] = useState('')
     const [specialty, setSpecialty] = useState('')
     const [pass, setPass] = useState('')
-    const [rePass, setRePass] = useState('')
+    // const [rePass, setRePass] = useState('')
 
-    const onClickButton = () => {
+    const onSubmit = (e) => {
+        e.preventDefault()
         const student = {
             name,
             email,
@@ -23,61 +24,71 @@ const Student = ({onClickButtonStudent}) => {
     }
 
     return (
-        <>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    className="validate inputReg"
-                    placeholder="Имя"
-                    value={name}
-                    onChange={ (e) => setName(e.target.value)}/>
+        <form className="reg_form" onSubmit={onSubmit}>
+            <div className="row">
+                <div className="input-field col s6">
+                    <input
+                        id="name"
+                        type="text"
+                        className="validate"
+                        value={name}
+                        onChange={ (e) => setName(e.target.value)}
+                    />
+                    <label htmlFor="name">Имя</label>
+                </div>
+                <div className="input-field col s6">
+                    <input
+                        id="email"
+                        type="email"
+                        className="validate"
+                        value={email}
+                        onChange={ (e) => setEmail(e.target.value)}
+                    />
+                    <label htmlFor="email">Email</label>
+                </div>
+                <div className="input-field col s6">
+                    <input
+                        id="group"
+                        type="text"
+                        className="validate"
+                        value={group}
+                        onChange={ (e) => setGroup(e.target.value)}
+                    />
+                    <label htmlFor="group">Группа</label>
+                </div>
+                <div className="input-field col s6">
+                    <input
+                        id="course"
+                        type="text"
+                        className="validate"
+                        value={course}
+                        onChange={ (e) => setCourse(e.target.value)}
+                    />
+                    <label htmlFor="course">Курс</label>
+                </div>
+                <div className="input-field col s6">
+                    <input
+                        id="specialty"
+                        type="text"
+                        className="validate"
+                        value={specialty}
+                        onChange={ (e) => setSpecialty(e.target.value)}
+                    />
+                    <label htmlFor="specialty">Специальность</label>
+                </div>
+                <div className="input-field col s6">
+                    <input
+                        id="pass"
+                        type="password"
+                        className="validate"
+                        value={pass}
+                        onChange={ (e) => setPass(e.target.value)}
+                    />
+                    <label htmlFor="pass">Пароль</label>
+                </div>
             </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    type="email"
-                    className="validate inputReg"
-                    placeholder="Email"
-                    value={email}
-                    onChange={ (e) => setEmail(e.target.value)}/>
-            </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    className="validate inputReg"
-                    placeholder="Группа"
-                    value={group}
-                    onChange={ (e) => setGroup(e.target.value)}/>
-            </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    className="validate inputReg"
-                    placeholder="Курс"
-                    value={course}
-                    onChange={ (e) => setCourse(e.target.value)} />
-            </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    className="validate inputReg"
-                    placeholder="Специальность"
-                    value={specialty}
-                    onChange={ (e) => setSpecialty(e.target.value)}/>
-            </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    type="password"
-                    className="validate inputReg"
-                    placeholder="Пароль"
-                    value={pass}
-                    onChange={ (e) => setPass(e.target.value)}/>
-            </div>
-            <div className=" containerInputReg input-field col s6">
-                <input
-                    type="password"
-                    className="validate inputReg"
-                    placeholder="Повториь, пароль"
-                    value={rePass}
-                    onChange={ (e) => setRePass(e.target.value)}/>
-            </div>
-            <button className="buttonAll buttonReg " onClick={onClickButton}>Зарегистрироваться</button>
-        </>
+            <button className="buttonAll reg_form_btn_submit" type="submit" >Зарегистрироваться</button>
+        </form>
     );
 };
 

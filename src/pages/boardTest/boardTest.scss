@@ -1,0 +1,71 @@
+@import "../../thems/index.scss";
+
+.board {
+  //height: 87vh;
+
+  .mrgb-0{
+    margin-bottom: 0;
+  }
+
+  .row .board_nav{
+    background-color: $mainColor;
+    height: 87vh;
+    box-shadow: 10px 0 10px -8px $mainColor;
+    padding: 0;
+
+    &_card {
+      display: block;
+      width: 100%;
+      color: white;
+      padding: 5px;
+      min-height: 80px;
+      //cursor: pointer;
+      border: none;
+      background-color:$mainColor;
+
+      &:hover{
+        background-color: $hoverColor;
+      }
+      &:focus, &_focus{
+        background-color: $focusColor;
+      }
+
+      &_header{
+        margin: 0 0 10px 0;
+        font-size: 26px;
+        text-align: center;
+      }
+      &_text{
+        font-size: 16px;
+        text-align: left;
+      }
+    }
+  }
+
+  .board .row &_info{
+    padding: 20px 20px;
+
+    &_header{
+      text-align: center;
+      margin:0;
+    }
+
+    &_table{
+      margin-top: 30px;
+      font-size: 18px;
+
+      & tr td:nth-child(2){
+        text-align: right;
+      }
+    }
+
+    &_btn{
+      display: block;
+      margin: 30px auto 0 auto;
+      font-size: 20px ;
+      padding: 10px 40px ;
+    }
+
+  }
+
+}

@@ -1,77 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-import { Header } from "../../componets/header/Header";
+import { tests } from "../../data"
 
-import "./boardTest.css"
+import { Header } from "../../componets/header/Header";
+import CardNavTest from "./CardNavTest";
+import TestInfo from "./TestInfo";
+
+import './boardTest.scss'
 
 const BoardTest = () => {
     const history = useHistory();
 
+    const [ currentTest, setCurrentTest ] = useState(tests[0])
+
     const onClickBtnBegin = () => {
-        history.push('/auth')
+        history.push({
+            pathname: '/test',
+            state: { test: currentTest }
+        });
+        // history.push('/auth')
+    }
+    const onClickNavTest = (test) => {
+        setCurrentTest(test)
     }
 
     return (
-        <>
+        <div>
             <Header />
-            <div className="row containerBoardTest">
+            <div className="board">
+                <div className="row mrgb-0">
 
-                <div className="col s3 navBoardTests">
+                    <div className="col s3 l2 board_nav">
 
-                    <div className="cardNavBoardTest"  onClick={() => console.log('click test math')}>
-                        <h3 className="h3NavBoardTest">Math</h3>
-                        <p className="pNavBoardTest">teacher</p>
-                    </div>
-                </div>
-
-
-                <div className="col s9 containerInfoBoardTests">
-                    <div className="titleInfoBoardTests">
-                        <h2 className="titleInfoBoardTests">Math</h2>
-                    </div>
-
-                    <div className="container subContainerInfoBoardTests">
-
-                        <table className="striped tableInfoBoardTests">
-
-                            <tbody>
-                            <tr>
-                                <td>teacher</td>
-                                <td>$0.87</td>
-                            </tr>
-                            <tr>
-                                <td>time</td>
-                                <td>$3.76</td>
-                            </tr>
-                            <tr>
-                                <td>questions</td>
-                                <td>$7.00</td>
-                            </tr>
-                            <tr>
-                                <td>subject</td>
-                                <td>$7.00</td>
-                            </tr>
-                            <tr>
-                                <td>complexity</td>
-                                <td>$7.00</td>
-                            </tr>
-                            <tr>
-                                <td>date</td>
-                                <td>$7.00</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        {
+                            tests.map( test =>
+                                <CardNavTest
+                                    item={test}
+                                    onSelect={onClickNavTest}
+                                    currentTestId={currentTest.id}
+                                    key={test.id}
+                                />
+                            )
+                        }
 
                     </div>
-                    <div className="buttonContainerInfoBoardTests">
-                        <button className="buttonAll buttonInfoBoardTests" onClick={onClickBtnBegin}>begin</button>
+
+
+                    <div className="col s9 l10 containerInfoBoardTests board_info">
+                        <TestInfo
+                            onClickBtnBegin={onClickBtnBegin}
+                            item={currentTest}
+                        />
                     </div>
 
                 </div>
-
             </div>
-        </>
+        </div>
     );
 };
 

@@ -1,0 +1,21 @@
+.example{
+  &Header {
+  height: 13vh;
+  //height: 100px;
+  background-color: #FF00CC;
+}
+  &NavTest{
+    height: 87vh;
+    background-color: #852EBA;
+  }
+  &WorkPlace{
+    height: 87vh;
+    background-color: #333399;
+  }
+  .mrg-0{
+    margin: 0;
+  }
+}
+
+
+

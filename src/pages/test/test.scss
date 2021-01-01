@@ -1,0 +1,21 @@
+@import "../../thems/index.scss";
+
+.test{
+
+  &_pagination{
+    text-align: center;
+
+    &.pagination li {
+      padding: 0 10px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    &.pagination li.active {
+      background-color: $mainColor;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
