@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import Loader from "../../componets/loader/Loader";
+import Pagination from "../../componets/pagination/Pagination";
 
 import './test.scss'
 import M from "materialize-css"
@@ -14,10 +15,14 @@ const Test = props => {
     const [test, setTest] = useState(null)
     const [selectedQuestion, setSelectedQuestion] = useState(null)
 
+    const [time, setTime] = useState(10)
+
+
+
     useEffect(() => {
-        // console.log(location.pathname); // result: '/secondpage'
-        // console.log(location.search); // result: '?query=abc'
-        console.log(location.state.test); // result: 'some_value'
+        // console.log(location.pathname);
+        // console.log(location.search);
+        console.log(location.state.test);
 
         // setTimeout(() => setTest(location.state.test),1000)
         const { test } = location.state
@@ -35,28 +40,21 @@ const Test = props => {
         setSelectedQuestion(question)
     }
 
+
+
     if ( test === null ){ return (<Loader />) }
 
     return (
         <div>
             <Header />
             <div className="test">
-                <p>Test!</p>
+                <p>{test.subject}</p>
                 <div className="container">
-                    <ul className="pagination test_pagination">
-                        {
-                            test.questions.map( (item,index) => {
-                                return (
-                                    <li
-                                        key={item.id}
-                                        className={`${selectedQuestion.id === item.id ? 'active' : 'waves-effect'}`}
-                                        onClick={ () => onClickPagination(item)}
-                                    >{index + 1}</li>
-                                )
-                            })
-                        }
-                    </ul>
-
+                    <Pagination
+                        list={test.questions}
+                        selected={selectedQuestion}
+                        onClick={onClickPagination}
+                    />
                     <div>
                         {selectedQuestion.textQuestion}
                     </div>

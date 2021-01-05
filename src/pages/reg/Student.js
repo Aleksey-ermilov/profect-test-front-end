@@ -7,7 +7,6 @@ const Student = ({onClickButtonStudent}) => {
     const [course, setCourse] = useState('')
     const [specialty, setSpecialty] = useState('')
     const [pass, setPass] = useState('')
-    // const [rePass, setRePass] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()

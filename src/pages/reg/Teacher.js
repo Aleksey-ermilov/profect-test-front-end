@@ -5,7 +5,6 @@ const Teacher = ({onClickButtonTeacher}) => {
     const [email, setEmail] = useState('')
     const [subject, setSubject] = useState('')
     const [pass, setPass] = useState('')
-    // const [rePass, setRePass] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
