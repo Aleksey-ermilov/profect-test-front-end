@@ -2,12 +2,15 @@ import React from 'react';
 
 import Timer from 'react-compound-timer'
 
+import './timer.scss'
+
 const _Timer = ({time,  callback}) => {
     return (
-        <div>
+        <div className="timer">
             <Timer
                 direction={'backward'}
                 initialTime={time}
+                formatValue={(value) => `${(value < 10 ? `0${value}` : value)}`}
                 checkpoints={[
                     {
                         time: 0,
@@ -28,6 +31,7 @@ const _Timer = ({time,  callback}) => {
 
 export default _Timer;
 
+/*
 const withTimer = timerProps => WrappedComponent => wrappedComponentProps => (
     <Timer {...timerProps} formatValue={(value) => `${(value < 10 ? `0${value}` : value)} `}>
         {timerRenderProps =>
@@ -66,3 +70,4 @@ export const TimerNoControl = withTimer({
     direction: 'backward',
     initialTime: 100000,
 })(ClockUpDown);
+*/

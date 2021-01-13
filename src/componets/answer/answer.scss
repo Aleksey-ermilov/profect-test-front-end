@@ -1,0 +1,16 @@
+.answer_form{
+
+  & input[type="radio"]:checked+span,
+  & input[type="radio"]:not(:checked)+span{
+    font-size: 16px;
+    color: black;
+    margin-top: 10px;
+  }
+
+  &_btn {
+    display: block;
+    font-size: 18px;
+    padding: 10px 30px;
+    margin: 40px auto 0 auto;
+  }
+}

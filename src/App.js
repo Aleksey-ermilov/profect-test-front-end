@@ -9,6 +9,8 @@ import { Auth } from "./pages/auth/Auth";
 import { Reg } from "./pages/reg/Reg";
 import BoardTest from "./pages/boardTest/BoardTest";
 import Test from "./pages/test/Test";
+import StudentStory from "./pages/studentStory/StudentStory";
+import TestResult from "./pages/testResult/TestResult";
 
 import './App.scss';
 
@@ -25,6 +27,8 @@ function App() {
                 <Route path={'/reg'} component={Reg} exact />
                 <Route path={'/boardTest'} component={BoardTest} exact />
                 <Route path={'/test'} component={Test} exact />
+                <Route path={'/studentStory'} component={StudentStory} exact />
+                <Route path={'/testResult'} component={TestResult} exact />
 
             </BrowserRouter>
 

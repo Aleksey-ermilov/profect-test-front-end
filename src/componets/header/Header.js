@@ -11,7 +11,7 @@ export const Header = () => {
 
     useEffect(() => {
         let dropDown = document.querySelectorAll('.dropdown-trigger');
-        M.Dropdown.init(dropDown, {});
+        M.Dropdown.init(dropDown, {constrainWidth:false});
     }, []);
 
     return (
@@ -36,14 +36,21 @@ export const Header = () => {
                         <img className="header_avatar_container_avatar" src={avatar} alt="avatar"/>
                     </div>
 
-                    <ul id='dropdown1' className='dropdown-content'>
-                        <li><button >two</button></li>
-                        <li className="divider"></li>
-                        <li><button >three</button></li>
-                        <li><button ><i className="material-icons">view_module</i>four</button></li>
-                        <li><button ><i className="material-icons">cloud</i>five</button></li>
-                        <li><Link to={'/auth'}>exit</Link></li>
-                    </ul>
+                    <div id='dropdown1' className='dropdown-content header_dropdown'>
+                        <h3>User</h3>
+                        <hr/>
+                        <div className="header_dropdown_links">
+                            <div className="header_dropdown_links_link">
+                                <Link to={'/studentStory'} >История сдачи</Link>
+                            </div>
+                            <div className="header_dropdown_links_link">
+                                <Link to={'/reg'} >Редактировать профиль</Link>
+                            </div>
+                            <div className="header_dropdown_links_link">
+                                <Link to={'/auth'}>Выйти</Link>
+                            </div>
+                        </div>
+                    </div>
                 </>
             }
         </header>

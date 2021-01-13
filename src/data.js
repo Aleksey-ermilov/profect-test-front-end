@@ -12,31 +12,31 @@ export const tests = [
             [
                 {
                     textQuestion: "Вопрос 1", pointsForCorrectAnswer: 1, id: '1',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: true, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: false, id: '2',},
-                            {textAnswer: "Ответ 3", isTrue: false, id: '3',}
+                            {textAnswer: "Ответ 1", pointCorrect: 1, id: '1',},
+                            {textAnswer: "Ответ 2", pointCorrect: 0, id: '2',},
+                            {textAnswer: "Ответ 3", pointCorrect: 0, id: '3',}
                         ]
                 },
 
                 {
                     textQuestion: "Вопрос 2", pointsForCorrectAnswer: 1, id: '2',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: false, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: true, id: '2',}
+                            {textAnswer: "Ответ 1", pointCorrect: 0, id: '4',},
+                            {textAnswer: "Ответ 2", pointCorrect: 1, id: '5',}
                         ]
                 },
 
                 {
                     textQuestion: "Вопрос 3", pointsForCorrectAnswer: 2, id: '3',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: false, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: false, id: '2',},
-                            {textAnswer: "Ответ 3", isTrue: true, id: '3',},
-                            {textAnswer: "Ответ 4", isTrue: false, id: '4',}
+                            {textAnswer: "Ответ 1", pointCorrect: 0, id: '6',},
+                            {textAnswer: "Ответ 2", pointCorrect: 0, id: '7',},
+                            {textAnswer: "Ответ 3", pointCorrect: 1, id: '8',},
+                            {textAnswer: "Ответ 4", pointCorrect: 0, id: '9',}
                         ]
                 }
             ]
@@ -54,31 +54,31 @@ export const tests = [
             [
                 {
                     textQuestion: "Вопрос 1", pointsForCorrectAnswer: 1, id: '1',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: true, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: false, id: '2',},
-                            {textAnswer: "Ответ 3", isTrue: false, id: '3',}
+                            {textAnswer: "Ответ 1", pointCorrect: 0, id: '1',},
+                            {textAnswer: "Ответ 2", pointCorrect: 1, id: '2',},
+                            {textAnswer: "Ответ 3", pointCorrect: 0, id: '3',}
                         ]
                 },
 
                 {
                     textQuestion: "Вопрос 2", pointsForCorrectAnswer: 1, id: '2',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: false, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: true, id: '2',}
+                            {textAnswer: "Ответ 1", pointCorrect: 0, id: '1',},
+                            {textAnswer: "Ответ 2", pointCorrect: 1, id: '2',}
                         ]
                 },
 
                 {
                     textQuestion: "Вопрос 3", pointsForCorrectAnswer: 2, id: '3',
-                    Answers:
+                    answers:
                         [
-                            {textAnswer: "Ответ 1", isTrue: false, id: '1',},
-                            {textAnswer: "Ответ 2", isTrue: false, id: '2',},
-                            {textAnswer: "Ответ 3", isTrue: true, id: '3',},
-                            {textAnswer: "Ответ 4", isTrue: false, id: '4',}
+                            {textAnswer: "Ответ 1", pointCorrect: 0, id: '1',},
+                            {textAnswer: "Ответ 2", pointCorrect: 0, id: '2',},
+                            {textAnswer: "Ответ 3", pointCorrect: 1, id: '3',},
+                            {textAnswer: "Ответ 4", pointCorrect: 0, id: '4',}
                         ]
                 }
             ]

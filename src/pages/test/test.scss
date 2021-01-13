@@ -1,21 +1,23 @@
 @import "../../thems/index.scss";
 
 .test{
-
-  &_pagination{
-    text-align: center;
-
-    &.pagination li {
-      padding: 0 10px;
-      font-size: 18px;
-      text-align: center;
-      line-height: 30px;
-    }
-
-    &.pagination li.active {
-      background-color: $mainColor;
-      color: white;
-      cursor: pointer;
-    }
+  &_timer{
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 18px;
   }
+  &_pgt{
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  &_question{
+    font-size: 18px;
+    margin-top: 30px;
+  }
+
+  &_answers{
+    padding: 30px 20px;
+  }
+
 }
