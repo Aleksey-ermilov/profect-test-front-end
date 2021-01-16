@@ -35,7 +35,7 @@ export const tests = [
                         [
                             {textAnswer: "Ответ 1", pointCorrect: 0, id: '6',},
                             {textAnswer: "Ответ 2", pointCorrect: 0, id: '7',},
-                            {textAnswer: "Ответ 3", pointCorrect: 1, id: '8',},
+                            {textAnswer: "Ответ 3", pointCorrect: 2, id: '8',},
                             {textAnswer: "Ответ 4", pointCorrect: 0, id: '9',}
                         ]
                 }
@@ -85,3 +85,40 @@ export const tests = [
     },
 
 ]
+
+export const student1 = {
+    name: 'Alex',
+    email: 'Alex@mail.ru',
+    group: '2134',
+    course: '3',
+    specialty:'IVT',
+    pass:'111',
+    user: 'student',
+    id: '1',
+}
+export const student2 = {
+    name: 'Viki',
+    email: 'Viki@mail.ru',
+    group: '3541',
+    course: '1',
+    specialty:'UTS',
+    pass:'111',
+    user: 'student',
+    id: '2',
+}
+export const teacher1 = {
+    name:'John',
+    email: 'John@mail.ru',
+    subject:'History',
+    pass:'111',
+    user: 'teacher',
+    id: '3',
+}
+export const teacher2 = {
+    name:'Mary',
+    email: 'Mary@mail.ru',
+    subject:'Biology',
+    pass:'111',
+    user: 'teacher',
+    id: '4',
+}

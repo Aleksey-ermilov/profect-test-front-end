@@ -1,40 +1,31 @@
-import {action, makeObservable, observable,computed} from 'mobx'
+import { action, makeObservable, observable, computed } from 'mobx'
 
 import { tests as data } from '../data'
 
 class Test {
     tests = data
+    test = this.tests[0]
     listAnswers = observable.map();
-
-    observableMap = observable.map();
 
     constructor() {
         makeObservable(this,{
             tests:observable,
-            observableMap: observable,
+            test: observable,
             listAnswers: observable,
+
+            setTest: action,
 
             setListAnswers:action,
             getListAnswers:computed,
 
-            setMap: action,
-            showMap: computed,
         })
     }
 
     setListAnswers (k,v) { this.listAnswers.set(k,v) }
-    get getListAnswers() { return new Map(this.listAnswers.toJSON()) }
+    get getListAnswers () { return new Map(this.listAnswers.toJSON()) }
+    clearMap () { this.listAnswers.clear() }
 
-
-
-
-    setMap(key,value) {
-        this.observableMap.set(key,value)
-    }
-
-     get showMap() {
-        return new Map(this.observableMap.toJSON())
-    }
+    setTest (test) { this.test = test }
 
 }
 

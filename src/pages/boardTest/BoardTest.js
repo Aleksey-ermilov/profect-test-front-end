@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
+
+import { observer } from 'mobx-react'
+import testStory from '../../store/test'
 
 import { tests } from "../../data"
 
@@ -9,20 +12,18 @@ import TestInfo from "./TestInfo";
 
 import './boardTest.scss'
 
-const BoardTest = () => {
+const BoardTest = observer(() => {
     const history = useHistory();
-
-    const [ currentTest, setCurrentTest ] = useState(tests[0])
 
     const onClickBtnBegin = () => {
         history.push({
-            pathname: '/test',
-            state: { test: currentTest }
+            pathname: '/test'/*,
+            state: { test: currentTest }*/
         });
         // history.push('/auth')
     }
     const onClickNavTest = (test) => {
-        setCurrentTest(test)
+        testStory.setTest(test)
     }
 
     return (
@@ -38,7 +39,7 @@ const BoardTest = () => {
                                 <CardNavTest
                                     item={test}
                                     onSelect={onClickNavTest}
-                                    currentTestId={currentTest.id}
+                                    currentTestId={testStory.test.id}
                                     key={test.id}
                                 />
                             )
@@ -50,7 +51,7 @@ const BoardTest = () => {
                     <div className="col s9 l10 containerInfoBoardTests board_info">
                         <TestInfo
                             onClickBtnBegin={onClickBtnBegin}
-                            item={currentTest}
+                            item={testStory.test}
                         />
                     </div>
 
@@ -58,6 +59,6 @@ const BoardTest = () => {
             </div>
         </div>
     );
-};
+})
 
 export default BoardTest;

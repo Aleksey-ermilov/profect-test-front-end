@@ -44,7 +44,7 @@ export const Header = () => {
                                 <Link to={'/studentStory'} >История сдачи</Link>
                             </div>
                             <div className="header_dropdown_links_link">
-                                <Link to={'/reg'} >Редактировать профиль</Link>
+                                <Link to={'/editUser'} >Редактировать профиль</Link>
                             </div>
                             <div className="header_dropdown_links_link">
                                 <Link to={'/auth'}>Выйти</Link>

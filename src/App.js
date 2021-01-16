@@ -11,6 +11,7 @@ import BoardTest from "./pages/boardTest/BoardTest";
 import Test from "./pages/test/Test";
 import StudentStory from "./pages/studentStory/StudentStory";
 import TestResult from "./pages/testResult/TestResult";
+import EditUser from "./pages/editUser/EditUser";
 
 import './App.scss';
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path={'/test'} component={Test} exact />
                 <Route path={'/studentStory'} component={StudentStory} exact />
                 <Route path={'/testResult'} component={TestResult} exact />
+                <Route path={'/editUser'} component={EditUser} exact />
 
             </BrowserRouter>
 

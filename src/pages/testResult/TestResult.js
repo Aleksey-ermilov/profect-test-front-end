@@ -1,65 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+import { observer } from 'mobx-react'
+import testStory  from '../../store/test'
 
 import Loader from "../../componets/loader/Loader";
+import { Header } from "../../componets/header/Header";
 
 import './testResult.scss'
 
-const TestResult = () => {
-    const location = useLocation();
+const TestResult = observer(() => {
     const history = useHistory();
 
-    const [result, setResult] = useState(null)
-    const [test, setTest] = useState(null)
+    const [percentResult, setPercentResult] = useState(0)
 
     useEffect(() => {
-        console.log(location.state.result);
-        const { result, test } = location.state
-        setResult(result)
-        setTest(test)
-    }, [location]);
+        const { questions } = testStory.test
+
+        let sumPointCorrect = 0
+        questions.forEach( item => {
+            sumPointCorrect += item.pointsForCorrectAnswer
+        })
+
+        const result = []
+        testStory.getListAnswers.forEach( (v, k) => {
+            const question = questions.find( q => q.id === k)
+            const point = question.answers.find( a => a.id === v).pointCorrect
+            result.push(point)
+        })
+        const sumResult = result.reduce((accumulator, currentValue) => accumulator + currentValue)
+
+        setPercentResult(sumResult * 100 / sumPointCorrect)
+
+    }, []);
 
     const handlerBtn = () => {
         history.push({
             pathname: '/boardTest',
         });
+        testStory.clearMap()
     }
 
-    const resultHandler = () => {
-        const { questions } = test
-        const keys = result.map(item => Object.keys(item)[0])
-        const values = result.map(item => Object.values(item)[0])
-
-        const listPoint = []
-        listPoint.push(
-            keys.map( k => {
-                const q = questions.find( q => q.id === k)
-                return values.map( v => {
-
-                    if ( q.answers.find( a => a.id === v ) ){
-                        console.log(q.answers.find( a => a.id === v ))
-                        return q.answers.find( a => a.id === v ).pointCorrect
-                    }
-                    return null
-                })
-            })
-        )
-        console.log(listPoint)
-    }
-
-
-    if (result === null) {
+    if (testStory.test === null) {
         return (<Loader/>)
     }
 
-    resultHandler()
-
     return (
         <div>
-            Test Result
-            <button onClick={handlerBtn}>Back!</button>
+            <Header />
+            <div className="testResult">
+                <div className="testResult_boxResult">
+                    <h3>Результат: {percentResult}%</h3>
+                    <h4>Оценка: ...</h4>
+                    <button className="buttonAll testResult_boxResult_btn" onClick={handlerBtn}>Назад</button>
+                </div>
+            </div>
         </div>
-    );
-};
+    )
+});
 
 export default TestResult;
