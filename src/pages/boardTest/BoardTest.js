@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
 
-import { observer } from 'mobx-react'
-import testStory from '../../store/test'
-
-import { tests } from "../../data"
-
-import { Header } from "../../componets/header/Header";
 import CardNavTest from "./CardNavTest";
 import TestInfo from "./TestInfo";
+import Loader from "../../componets/loader/Loader";
+
+import {fetchedTests, selectedTest} from "../../store/redux/test/actionsTest";
+import {useMessage} from "../../hooks/message.hook";
 
 import './boardTest.scss'
 
-const BoardTest = observer(() => {
+
+const BoardTest = ({error, tests, currentTest, fetchedTests, selectedTest}) => {
     const history = useHistory();
+    const message = useMessage()
+
+    useEffect( () => {
+        fetchedTests()
+        console.log('BoardTest')
+    },[])
+
+    useEffect(()=> {
+        message(error)
+    },[error,message])
 
     const onClickBtnBegin = () => {
         history.push({
@@ -23,12 +33,16 @@ const BoardTest = observer(() => {
         // history.push('/auth')
     }
     const onClickNavTest = (test) => {
-        testStory.setTest(test)
+        console.log('onClickNavTest',test)
+        selectedTest(test)
+    }
+
+    if (!tests.length ){
+        return <Loader />
     }
 
     return (
-        <div>
-            <Header />
+
             <div className="board">
                 <div className="row mrgb-0">
 
@@ -39,7 +53,7 @@ const BoardTest = observer(() => {
                                 <CardNavTest
                                     item={test}
                                     onSelect={onClickNavTest}
-                                    currentTestId={testStory.test.id}
+                                    currentTestId={currentTest.id}
                                     key={test.id}
                                 />
                             )
@@ -49,16 +63,28 @@ const BoardTest = observer(() => {
 
 
                     <div className="col s9 l10 containerInfoBoardTests board_info">
-                        <TestInfo
-                            onClickBtnBegin={onClickBtnBegin}
-                            item={testStory.test}
-                        />
+                            <TestInfo
+                                onClickBtnBegin={onClickBtnBegin}
+                                item={currentTest}
+                            />
                     </div>
 
                 </div>
             </div>
-        </div>
+
     );
+}
+
+const mapStateToProps = state => ({
+    tests: state.test.tests,
+    currentTest: state.test.currentTest,
+    // loading: state.app.loading,
+    error: state.app.error,
 })
 
-export default BoardTest;
+const mapDispatchToProps = {
+    fetchedTests,
+    selectedTest
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardTest);

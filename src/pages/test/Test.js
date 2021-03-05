@@ -1,21 +1,26 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useHistory} from "react-router-dom";
+import { connect } from 'react-redux'
 
-import { observer } from 'mobx-react'
-import testStory from '../../store/test'
-
-import {Header} from "../../componets/header/Header";
-import Loader from "../../componets/loader/Loader";
 import Pagination from "../../componets/pagination/Pagination";
 import _Timer from "../../componets/timer/Timer";
 import Answer from "../../componets/answer/Answer";
 
+import {useMessage} from "../../hooks/message.hook";
+
+import {setListAnswers} from "../../store/redux/test/actionsTest";
+
 import './test.scss'
 
-const Test = observer (props => {
+const Test = ({currentTest,error, listAnswers, setListAnswers}) => {
     const history = useHistory();
+    const message = useMessage()
 
-    const [selectedQuestion, setSelectedQuestion] = useState(testStory.test.questions[0])
+    const [selectedQuestion, setSelectedQuestion] = useState(currentTest.questions[0])
+
+    useEffect(()=> {
+        message(error)
+    },[error,message])
 
     const onClickPagination = question => {
         setSelectedQuestion(question)
@@ -25,29 +30,44 @@ const Test = observer (props => {
         // history.push({
         //     pathname: '/boardTest'
         // });
+        message('Время вышло! Тест провален!!!')
     }
 
     const onAnswers = (answer) => {
-        testStory.setListAnswers(answer[0],answer[1])
+        const ans = listAnswers.find( item => item.question === answer.question )
+        if (ans){
+            setListAnswers (
+                listAnswers.map( item => {
+                    if (item.question === answer.question){
+                        item.answer = answer.answer
+                    }
+                        return item
+                })
+            )
+        }else {
+            setListAnswers ([ ...listAnswers, answer ])
+        }
     }
 
     const selectedAnswer = () => {
-        return testStory.getListAnswers.get(selectedQuestion.id)
+        const selectedAnswer = listAnswers.find( item => item.question === selectedQuestion.id)
+        return selectedAnswer ? selectedAnswer.answer : ''
     }
 
     const titleBtn = () => {
-        return testStory.getListAnswers.size === testStory.test.questions.length ? 'Завершить Тест' : 'Далее'
+        return listAnswers.length === currentTest.questions.length ? 'Завершить Тест' : 'Далее'
     }
 
     const onSubmit = () => {
-        if(testStory.getListAnswers.size === testStory.test.questions.length){
+        if(listAnswers.length === currentTest.questions.length){
             history.push({
                 pathname: '/testResult'
             });
         }
-        const { questions } = testStory.test
+        const { questions } = currentTest
         questions.find( item => {
-            if (!testStory.getListAnswers.has(item.id)){
+            const ans = listAnswers.find( la => la.question === item.id )
+            if( !ans ){
                 setSelectedQuestion(item)
                 return true
             }
@@ -55,24 +75,18 @@ const Test = observer (props => {
         })
     }
 
-    if (testStory.test === null) {
-        return (<Loader/>)
-    }
-
     return (
-        <div>
-            <Header/>
             <div className="test">
                 <div className="test_timer">
                     <_Timer
-                        time={testStory.test.timeTest * 1000}
+                        time={currentTest.timeTest * 1000 }
                         callback={endTest}
                     />
                 </div>
                 <div className="container">
                     <div className="test_pgt">
                         <Pagination
-                            list={testStory.test.questions}
+                            list={currentTest.questions}
                             selected={selectedQuestion}
                             onClick={onClickPagination}
                         />
@@ -92,9 +106,18 @@ const Test = observer (props => {
 
                 </div>
             </div>
-        </div>
     )
 
-});
+};
 
-export default Test;
+const mapStateToProps = state => ({
+    currentTest: state.test.currentTest,
+    listAnswers: state.test.listAnswers,
+    error: state.app.error,
+})
+
+const mapDispatchToProps = {
+    setListAnswers
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Test);

@@ -1,43 +1,56 @@
-import React from 'react'
-import { BrowserRouter, Route } from "react-router-dom";
+import React, {useEffect} from 'react'
+import {BrowserRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 
-// import { nanoid } from "nanoid";
+import { rerun } from "./store/redux/user/actionUser";
 
-import Example from "./pages/example/Example";
+import useRoutes from "./routes";
 
-import { Auth } from "./pages/auth/Auth";
-import { Reg } from "./pages/reg/Reg";
-import BoardTest from "./pages/boardTest/BoardTest";
-import Test from "./pages/test/Test";
-import StudentStory from "./pages/studentStory/StudentStory";
-import TestResult from "./pages/testResult/TestResult";
-import EditUser from "./pages/editUser/EditUser";
+import Header from "./componets/header/Header";
+import Loader from "./componets/loader/Loader";
+
+import {localStorageGetUser} from "./store/localStorage";
 
 import './App.scss';
+import M from "materialize-css";
 
-function App() {
-    // let id = nanoid()
-    // console.log(id)
-  return (
-    <div>
-            <BrowserRouter >
+function App({ token, rerun }) {
+    const isAuthenticated = !!token
+    const route = useRoutes(isAuthenticated)
 
-                <Route path={'/'} component={Example} exact />
+    useEffect(()=>{
+        // M.AutoInit()
+        const user = localStorageGetUser()
+        if (user){
+            rerun(user.token,user.user)
+        }
+    },[])
 
-                <Route path={'/auth'} component={Auth} exact />
-                <Route path={'/reg'} component={Reg} exact />
-                <Route path={'/boardTest'} component={BoardTest} exact />
-                <Route path={'/test'} component={Test} exact />
-                <Route path={'/studentStory'} component={StudentStory} exact />
-                <Route path={'/testResult'} component={TestResult} exact />
-                <Route path={'/editUser'} component={EditUser} exact />
+    const showHeader = () => {
+        if (isAuthenticated){
+            return <Header />
+        }
+    }
 
-            </BrowserRouter>
+    return (
+            <div>
 
-
-
-    </div>
-  );
+                <BrowserRouter>
+                    {showHeader()}
+                    {route}
+                </BrowserRouter>
+            </div>
+    );
 }
 
-export default App;
+const mapStateToProps = state => ({
+    loading: state.app.loading,
+    error: state.app.error,
+    token: state.user.token
+})
+
+const mapDispatchToProps = {
+    rerun
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

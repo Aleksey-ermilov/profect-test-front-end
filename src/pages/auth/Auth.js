@@ -1,18 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
+
+import { useHttp } from "../../hooks/http.hook";
+import { useMessage } from "../../hooks/message.hook";
+
+import {showError} from "../../store/redux/app/actionApp";
+import {login} from "../../store/redux/user/actionUser";
 
 import './auth.scss'
 
-export const Auth = () => {
+const Auth = ({loading,error,login}) => {
     const history = useHistory();
+    const message = useMessage()
 
-    const [name, setName] = useState('')
-    const [pass, setPass] = useState('')
+    const [form, setForm] = useState({
+       email:'', password:'',
+    })
 
-    const onSubmit = (e) => {
+    useEffect(()=> {
+        message(error)
+    },[error,message])
+
+    const changeHandler = e => {
+        setForm({...form, [e.target.name]:e.target.value })
+    }
+
+    const onSubmit = async (e) => {
         e.preventDefault()
         //checked on empty
+
+        login(form)
+
         history.push('/boardTest')
+        console.log('auth', form)
     }
 
     return (
@@ -27,23 +48,23 @@ export const Auth = () => {
                             <i className="material-icons prefix">email</i>
                             <input
                                 id="email"
+                                name={'email'}
                                 type="email"
                                 className="validate"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={changeHandler}
                             />
                                 <label htmlFor="email">Email</label>
                         </div>
                         <div className="input-field">
                             <i className="material-icons prefix">lock</i>
                             <input
-                                id="icon_telephone"
+                                id="password"
+                                name={'password'}
                                 type="password"
                                 className="validate"
-                                value={pass}
-                                onChange={(e) => setPass(e.target.value)}
+                                onChange={changeHandler}
                             />
-                                <label htmlFor="icon_telephone">Пароль</label>
+                                <label htmlFor="password">Пароль</label>
                         </div>
                         <div className="auth_form_inputs_linc">
                             <Link to={"/pass"} >Забыл пароль?</Link>
@@ -52,9 +73,24 @@ export const Auth = () => {
                     </div>
                 </div>
 
-                <button className="buttonAll auth_form_button" type="submit">Войти</button>
+                <button
+                    className="buttonAll auth_form_button"
+                    type="submit"
+                    disabled={loading}
+                >Войти</button>
 
             </form>
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    loading: state.app.loading,
+    error: state.app.error,
+})
+
+const mapDispatchToProps = {
+    login,
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Auth)

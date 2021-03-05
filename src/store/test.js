@@ -14,6 +14,7 @@ class Test {
             listAnswers: observable,
 
             setTest: action,
+            clearTest: action,
 
             setListAnswers:action,
             getListAnswers:computed,
@@ -26,6 +27,7 @@ class Test {
     clearMap () { this.listAnswers.clear() }
 
     setTest (test) { this.test = test }
+    clearTest () { this.test = this.tests[0] }
 
 }
 

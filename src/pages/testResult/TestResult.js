@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-
-import { observer } from 'mobx-react'
-import testStory  from '../../store/test'
-
-import Loader from "../../componets/loader/Loader";
-import { Header } from "../../componets/header/Header";
+import { connect } from 'react-redux'
 
 import './testResult.scss'
+import {clearListAnswers} from "../../store/redux/test/actionsTest";
+import {useMessage} from "../../hooks/message.hook";
 
-const TestResult = observer(() => {
+const TestResult = ({listAnswers,currentTest, error, clearListAnswers}) => {
     const history = useHistory();
+    const message = useMessage()
 
     const [percentResult, setPercentResult] = useState(0)
 
     useEffect(() => {
-        const { questions } = testStory.test
+        const { questions } = currentTest
 
         let sumPointCorrect = 0
         questions.forEach( item => {
@@ -23,9 +21,9 @@ const TestResult = observer(() => {
         })
 
         const result = []
-        testStory.getListAnswers.forEach( (v, k) => {
-            const question = questions.find( q => q.id === k)
-            const point = question.answers.find( a => a.id === v).pointCorrect
+        listAnswers.forEach( item => {
+            const question = questions.find( q => q.id === item.question)
+            const point = question.answers.find( a => a.id === item.answer).pointCorrect
             result.push(point)
         })
         const sumResult = result.reduce((accumulator, currentValue) => accumulator + currentValue)
@@ -34,20 +32,27 @@ const TestResult = observer(() => {
 
     }, []);
 
+    useEffect(()=> {
+        message(error)
+    },[error,message])
+
     const handlerBtn = () => {
         history.push({
             pathname: '/boardTest',
         });
-        testStory.clearMap()
+        clearListAnswers()
     }
 
-    if (testStory.test === null) {
-        return (<Loader/>)
-    }
+    /*
+    uid: string
+  tid: string
+  listAnswer: [object]
+  time: string
+  percent: string
+  appraisal: string
+  */
 
     return (
-        <div>
-            <Header />
             <div className="testResult">
                 <div className="testResult_boxResult">
                     <h3>Результат: {percentResult}%</h3>
@@ -55,8 +60,17 @@ const TestResult = observer(() => {
                     <button className="buttonAll testResult_boxResult_btn" onClick={handlerBtn}>Назад</button>
                 </div>
             </div>
-        </div>
     )
-});
+};
 
-export default TestResult;
+const mapStateToProps = state => ({
+    currentTest: state.test.currentTest,
+    listAnswers: state.test.listAnswers,
+    error: state.app.error,
+})
+
+const mapDispatchToProps = {
+    clearListAnswers
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TestResult);
