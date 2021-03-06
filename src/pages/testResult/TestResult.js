@@ -3,14 +3,15 @@ import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux'
 
 import './testResult.scss'
-import {clearListAnswers} from "../../store/redux/test/actionsTest";
+import {clearListAnswers, sendListAnswer} from "../../store/redux/test/actionsTest";
 import {useMessage} from "../../hooks/message.hook";
 
-const TestResult = ({listAnswers,currentTest, error, clearListAnswers}) => {
+const TestResult = ({listAnswers,currentTest, error, clearListAnswers, sendListAnswer}) => {
     const history = useHistory();
     const message = useMessage()
 
     const [percentResult, setPercentResult] = useState(0)
+    const [appraisalResult, setAppraisalResult] = useState(0)
 
     useEffect(() => {
         const { questions } = currentTest
@@ -27,8 +28,23 @@ const TestResult = ({listAnswers,currentTest, error, clearListAnswers}) => {
             result.push(point)
         })
         const sumResult = result.reduce((accumulator, currentValue) => accumulator + currentValue)
+        const percent = sumResult * 100 / sumPointCorrect
 
-        setPercentResult(sumResult * 100 / sumPointCorrect)
+        setPercentResult(percent)
+        setAppraisalResult( () => {
+            if (percent <= 50){
+                return 2
+            }
+            if (percent >= 51 && percent <= 75) {
+                return 3
+            }
+            if (percent >= 76 && percent <= 90){
+                return 4
+            }
+            if (percent >= 91){
+                return 5
+            }
+        })
 
     }, []);
 
@@ -37,26 +53,19 @@ const TestResult = ({listAnswers,currentTest, error, clearListAnswers}) => {
     },[error,message])
 
     const handlerBtn = () => {
+        sendListAnswer(listAnswers,percentResult,appraisalResult,currentTest.nameTest)
         history.push({
             pathname: '/boardTest',
         });
         clearListAnswers()
     }
 
-    /*
-    uid: string
-  tid: string
-  listAnswer: [object]
-  time: string
-  percent: string
-  appraisal: string
-  */
 
     return (
             <div className="testResult">
                 <div className="testResult_boxResult">
                     <h3>Результат: {percentResult}%</h3>
-                    <h4>Оценка: ...</h4>
+                    <h4>Оценка: {appraisalResult}</h4>
                     <button className="buttonAll testResult_boxResult_btn" onClick={handlerBtn}>Назад</button>
                 </div>
             </div>
@@ -70,7 +79,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    clearListAnswers
+    clearListAnswers,
+    sendListAnswer
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(TestResult);

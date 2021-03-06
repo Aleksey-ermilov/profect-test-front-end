@@ -1,1 +1,14 @@
 @import "../../thems/index.scss";
+
+.story{
+  &_header{
+    text-align: center;
+    margin:10px 0 20px 0;
+    font-size: 30px;
+  }
+  &_table{
+    margin-top: 30px;
+    font-size: 16px;
+
+  }
+}

@@ -11,14 +11,12 @@ import {useMessage} from "../../hooks/message.hook";
 
 import './boardTest.scss'
 
-
 const BoardTest = ({error, tests, currentTest, fetchedTests, selectedTest}) => {
     const history = useHistory();
     const message = useMessage()
 
     useEffect( () => {
         fetchedTests()
-        console.log('BoardTest')
     },[])
 
     useEffect(()=> {
@@ -27,13 +25,10 @@ const BoardTest = ({error, tests, currentTest, fetchedTests, selectedTest}) => {
 
     const onClickBtnBegin = () => {
         history.push({
-            pathname: '/test'/*,
-            state: { test: currentTest }*/
+            pathname: '/test'
         });
-        // history.push('/auth')
     }
     const onClickNavTest = (test) => {
-        console.log('onClickNavTest',test)
         selectedTest(test)
     }
 

@@ -40,9 +40,9 @@ export function fetchedPost () {
 export function fetchedTests () {
     return async (dispatch, getState) => {
         try{
-            const { user } = getState()
+            const { user:{user: {_id}} } = getState()
             dispatch(showLoader())
-            const data = await request(`${baseUrl}/test/testStudent/${user.user._id}`)
+            const data = await request(`${baseUrl}/test/testStudent/${_id}`)
             const tests = data.map( test => disassemblyTest(test) )
             dispatch({ type: SELECTED_TEST, payload: tests[0] })
             dispatch({ type: FETCH_TESTS, payload: tests })
@@ -85,4 +85,25 @@ export function clearListAnswers () {
     }
 }
 
-
+export function sendListAnswer (listAnswer,percent,appraisal,nameTest) {
+    return async (dispatch, getState) => {
+        try{
+            const { user: {user: {_id}}, test: {currentTest} } = getState()
+            const body = {
+                uid: _id,
+                tid: currentTest.id,
+                listAnswer: listAnswer,
+                time: new Date().getTime().toString(),
+                nameTest,
+                percent,
+                appraisal,
+            }
+            dispatch(showLoader())
+            const data = await request(`${baseUrl}/student-story/create`,'POST', body)
+            dispatch(hideLoader())
+        } catch (e){
+            dispatch(showError(e.message))
+            dispatch(hideLoader())
+        }
+    }
+}
